@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Universite{% endblock %}
+
+{% block body %}
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> GESTION DE L'UNIVERSITÉ </h3>
+        <!-- BASIC FORM VALIDATION -->
+        <div class="row mt">
+          
+          <div class="col-lg-8">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> Description :  {{ universite.titre }}</h4>
+              <hr>
+              <table class="table table-border">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ universite.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ universite.titre }}</td>
+            </tr>
+            <tr>
+                <th>Detail</th>
+                <td>{{ universite.detail }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ universite.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ universite.email }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ universite.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Site</th>
+                <td><a href="{{ universite.site }}">consulter </a></td>
+            </tr>
+            <tr>
+                <th>Postal</th>
+                <td>{{ universite.postal }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ universite.ville }}</td>
+            </tr>
+            <tr>
+                <th>Responsable</th>
+                <td>{{ universite.responsable }}</td>
+            </tr>
+            <tr>
+                <th>Filiale</th>
+                <td>{{ universite.filiale }}</td>
+            </tr>
+        </tbody>
+     </table>
+    
+    <a  style="display:inline-block" href="{{ path('universite_index') }}">liste université </a>
+    <a href="{{ path('universite_edit', {'id': universite.id}) }}">edit</a>
+
+    {{ include('universite/_delete_form.html.twig') }}
+ 
+
+   
+
+            </div>
+            <!-- /form-panel -->
+          </div>
+
+          <!-- /col-lg-12 -->
+        </div>
+        
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+</section>
+    
+
+    
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> EDITER UN TYPE D'UNIVERSITÉ </h3>
+        <!-- BASIC FORM VALIDATION -->
+        <div class="row mt">
+          <div class="col-lg-6">
+            <div class="form-panel">
+             <br>
+                {{ include('type_universite/_form.html.twig', {'button_label': 'modifier'}) }}
+                
+            </div>
+            <!-- /form-panel -->
+          </div>
+        </div>
+        
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+  </section>
+{% endblock %}

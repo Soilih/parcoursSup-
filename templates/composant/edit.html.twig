@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> MODIFIER UN COMPOSANT </h3>
+        <!-- BASIC FORM VALIDATION -->
+        <div class="row mt">
+          <div class="col-lg-6">
+            <div class="form-panel">
+                   {{ include('composant/_form.html.twig', {'button_label': 'Modifier'}) }}
+                
+            </div>
+            <!-- /form-panel -->
+          </div>
+         </div>
+
+          <!-- /col-lg-12 -->
+        </div>
+        
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+  </section>
+{% endblock %}

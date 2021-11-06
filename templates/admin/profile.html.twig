@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+  <section id="container">
+   
+    <section id="main-content" style="height:120px">
+      <section class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row content-panel">
+              <div class="col-md-4 profile-text mt mb centered">
+                <div class="right-divider hidden-sm hidden-xs">
+                  <h4 style="color:black">Telephone</h4>
+                  <h4>{{ app.user.tel }}</h4>
+                 
+                  <h4>$ 13,980</h4>
+                  <h6>MONTHLY EARNINGS</h6>
+                </div>
+              </div>
+              <!-- /col-md-4 -->
+              <div class="col-md-4 profile-text">
+                <h3>{{ app.user.nom }}</h3>
+                <h4> <strong> {{ app.user.email }} </strong></h4>
+                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
+                <br>
+                <p><button class="btn btn-theme"><i class="fa fa-envelope"></i> Send Message</button></p>
+              </div>
+              <!-- /col-md-4 -->
+              <div class="col-md-4 centered">
+                <div class="profile-pic">
+                  <p><img src="img/ui-sam.jpg" class="img-circle"></p>
+                  <p>
+                 
+                    <button class="btn btn-theme02">Editer votre profile</button>
+                  </p>
+                </div>
+              </div>
+              <!-- /col-md-4 -->
+            </div>
+            <!-- /row -->
+          </div>
+        <!-- /row -->
+      </section>
+    </section>
+    <!--main content end-->
+    <!--footer start-->
+   
+    <!--footer end-->
+  </section>
+
+{% endblock %}

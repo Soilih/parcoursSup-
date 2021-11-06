@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+  <section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> AJOUTER COMPOSANT </h3>
+        <!-- BASIC FORM VALIDATION -->
+        <div class="row mt">
+          <div class="col-lg-6">
+            <div class="form-panel">
+                {{ include('composant/_form.html.twig') }}
+                
+            </div>
+            <!-- /form-panel -->
+          </div>
+          <div class="col-lg-6">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> Liste des composants  </h4>
+              <hr>
+               <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Libelle</th>
+                        <th>Detail</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for composant in composants %}
+                    <tr>
+                        <td>{{ composant.id }}</td>
+                        <td>{{ composant.libelle }}</td>
+                        <td>{{ composant.detail }}</td>
+                        <td>
+                            <a href="{{ path('composant_show', {'id': composant.id}) }}">show</a>
+                            <a href="{{ path('composant_edit', {'id': composant.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+              
+            </div>
+            <!-- /form-panel -->
+          </div>
+
+          <!-- /col-lg-12 -->
+        </div>
+        
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+  </section>
+   
+
+   
+
+    <a href="{{ path('composant_index') }}">back to list</a>
+{% endblock %}

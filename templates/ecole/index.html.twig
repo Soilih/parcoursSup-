@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> GESTION D'ECOLES  </h3>
+        <!-- BASIC FORM VALIDATION -->
+        <div class="row mt">
+          
+          <div class="col-lg-12">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> LISTE DES ECOLES </h4>
+              <hr>
+              <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Libelle</th>
+                            <th>Adresse</th>
+                            <th>Telephone</th>
+                            <th>Detail</th>
+                            <th>Email</th>
+                            <th>Ile</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for ecole in ecoles %}
+                        <tr>
+                            <td>{{ ecole.id }}</td>
+                            <td>{{ ecole.libelle }}</td>
+                            <td>{{ ecole.adresse }}</td>
+                            <td>{{ ecole.telephone }}</td>
+                            <td>{{ ecole.detail }}</td>
+                            <td>{{ ecole.email }}</td>
+                            <td>{{ ecole.ile }}</td>
+                            <td>
+                                <a href="{{ path('ecole_show', {'id': ecole.id}) }}">show</a>
+                                <a href="{{ path('ecole_edit', {'id': ecole.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- /form-panel -->
+          </div>
+
+          <!-- /col-lg-12 -->
+        </div>
+        
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+</section>
+
+
+    
+{% endblock %}

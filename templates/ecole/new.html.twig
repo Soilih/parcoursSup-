@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Ecole{% endblock %}
+
+{% block body %}
+  <section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> AJOUTER UNE ECOLE </h3>
+        <!-- BASIC FORM VALIDATION -->
+        <div class="row mt">
+          <div class="col-lg-8">
+            <div class="form-panel">
+               {{ include('ecole/_form.html.twig') }}
+            </div>
+            <!-- /form-panel -->
+          </div>
+          
+            <!-- /form-panel -->
+          </div>
+
+          <!-- /col-lg-12 -->
+        </div>
+        
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+  </section>
+
+
+
+    <a href="{{ path('ecole_index') }}">back to list</a>
+{% endblock %}
