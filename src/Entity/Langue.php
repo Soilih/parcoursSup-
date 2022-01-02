@@ -2,33 +2,60 @@
 
 namespace App\Entity;
 
-use App\Repository\LangueRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=LangueRepository::class)
+ * Langue
+ *
+ * @ORM\Table(name="langue", indexes={@ORM\Index(name="IDX_9357758EA76ED395", columns={"user_id"})})
+ * @ORM\Entity
  */
 class Langue
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=255, nullable=false)
      */
     private $libelle;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="niveau", type="string", length=255, nullable=false)
      */
     private $niveau;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="langues")
+     * @var string|null
+     *
+     * @ORM\Column(name="diplome", type="string", length=255, nullable=true)
+     */
+    private $diplome;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="detail", type="text", length=0, nullable=true)
+     */
+    private $detail;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
      */
     private $user;
 
@@ -61,6 +88,30 @@ class Langue
         return $this;
     }
 
+    public function getDiplome(): ?string
+    {
+        return $this->diplome;
+    }
+
+    public function setDiplome(?string $diplome): self
+    {
+        $this->diplome = $diplome;
+
+        return $this;
+    }
+
+    public function getDetail(): ?string
+    {
+        return $this->detail;
+    }
+
+    public function setDetail(?string $detail): self
+    {
+        $this->detail = $detail;
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -72,4 +123,6 @@ class Langue
 
         return $this;
     }
+
+
 }

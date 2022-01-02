@@ -1,0 +1,641 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div
+        class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard</h1>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Dashboard v1</li>
+                        </ol>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div
+                class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                    <div
+                        class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>150</h3>
+
+                                <p>Niveau  Actuel
+                                </p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-bag"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div
+                        class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>53<sup style="font-size: 20px">%</sup>
+                                </h3>
+
+                                <p>Université d'etude
+                                </p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div
+                        class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>44</h3>
+
+                                <p>Diplome preparé
+                                </p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div
+                        class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>65</h3>
+
+                                <p>Type de flux
+                                </p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <!-- /.row -->
+                <!-- Main row -->
+                <div class="row">
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 col-sm-12">
+                                    <div class="card card-primary card-tabs">
+                                        <div class="card-header p-0 pt-1">
+                                            <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#perso" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Donneés personnelles 
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#respo" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Donneés Responsable
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#scolaire" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Cursus Scolaire</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#universsitaire" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Cursus Universitaire
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item"></ul>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="tab-content" id="custom-tabs-one-tabContent">
+                                                    <div class="tab-pane fade show active" id="perso" role="tabpanel" aria-labelledby="perso">
+                                                        <div>
+                                                             <a class="btn btn-success btn-sm" href="{{ path("etudiant_new") }}"  style="float:right ;padding-top:1%"> Complement des informations </a>
+                                                        </div>
+                                                   
+                                                        <table id="example2" class="table table-bordered table-hover">
+                                                            <thead>
+                                                            <tr class="table-primary"> 
+                                                              <th>Nom  </th>
+                                                              <th>Prénom </th>
+                                                              <th>Date de naissance  </th>
+                                                              <th>Lieu de naissance </th>
+                                                              <th>Adresse domicile  </th>
+                                                            
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                           
+                                                            {% for etudiants in app.user.etudiants %}
+                                                            <tr>
+                                                              <td>{{ etudiants.nom}}</td>
+                                                              <td> {{ etudiants.prenom}}  </td>
+                                                              <td>{{ etudiants.dateNaissance ? etudiants.dateNaissance|date('Y-m-d') : ''  }}</td>
+                                                              <td> {{ etudiants.lieunaissance}} </td>
+                                                              <td>{{ etudiants.adresse}}</td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                          
+                                                          </tbody>
+
+                                                          <thead>
+                                                            <tr class="table-primary"> 
+                                                              <th>Type de carte nationalite </th>
+                                                              <th> Numero de carte nationalite(passport / nin ) </th>
+                                                              <th> Date delivrance    </th>
+                                                              <th> Date limite  de validité  </th>
+                                                              <th> Pays de delivrance  </th>
+                                                             
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                           
+                                                            {% for etudiants in app.user.etudiants %}
+                                                             <tr>
+                                                              <td> {{ etudiants.typeIdentite}}  </td>
+                                                              <td> {{etudiants.nin  }} </td>
+                                                              
+                                                              <td> {{ etudiants.dateValide ? etudiants.dateValide |date('Y-m-d') : ''  }} </td>
+                                                              <td> {{  etudiants.datefin ? etudiants.dateValide |date('Y-m-d') : ''  }} </td>
+                                                              <td>  {{etudiants.paysDelivrance}} </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                          </tbody>
+
+                                                           <thead>
+                                                            <tr class="table-primary">
+                                                            <th> Numéro de télephone </th>
+                                                              <th>Adresse electronique (email) </th>
+                                                              <th> sexe   </th>
+                                                              <th>Status  </th>
+                                                              <th>Ile   </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                              <td> {{app.user.tel }} </td>
+                                                              <td> {{ app.user.email   }}  </td> 
+                                                            
+
+                                                          {% for etudiants  in  app.user.etudiants %}
+                                                            
+                                                              <td>  {{etudiants.sexe}} </td>
+                                                              <td> {{  etudiants.status}} </td>
+                                                              <td>  {{etudiants.ile }} </td>
+                                                               
+                                                            {% endfor %}
+                                                              </tr>
+                                                          
+                                                          </tbody>
+                                                          <thead>
+                                                            <tr class="table-primary">
+                                                            <th> Activité proffessionnelle </th>
+                                                              <th> Nationalite   </th>
+                                                              <th> photo d'identité</th>
+                                                            
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            
+                                                            {% for etudiants in app.user.etudiants %}
+                                                            <tr>
+                                                              <td> {{etudiants.activite }} </td>
+                                                              <td>{{  etudiants.nationalite  }}</td>
+                                                              <td> <img src="{{ asset('upload/'~ etudiants.photo) }}" style="width:100%;max-height:90px"/> </td>
+                                                              
+                                                              </tr>
+                                                <a class="btn btn-warning btn-sm" href="{{ path('etudiant_edit', {'id': etudiants.id}) }}"> editer </a>
+                                                            {% endfor %}
+                                                            
+                                                          </tbody>
+                                                          
+                                                          
+                                                       </table>
+
+                                                    </div>
+                                                    {# Gestion du responsable #}
+
+                                                    <div class="tab-pane fade" id="respo" role="tabpanel" aria-labelledby="respo">
+                                                         <table id="example2" class="table table-bordered table-hover text-nowrap">
+                                                            <thead>
+                                                            <tr class="table-success">
+                                                              <th>Nom  </th>
+                                                              <th> prenom  </th>
+                                                              <th>telephone</th>
+                                                              <th>Lieu de naissance   </th>
+                                                               <th>Adresse Email </th>
+                                                              <th>  Activité proffessionnelle </th>
+                                                              <th>  Revenu mensuel  </th>
+                                                              <th>Adresse domicile  </th>
+                                                              
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                          
+                                                            {% for responsables in app.user.responsables %}
+                                                                <tr>
+                                                              <td>{{ responsables.nom }}</td>
+                                                              <td> {{responsables.prenom}}  </td>
+                                                              <td>{{  responsables.tel  }}</td>
+                                                              <td> {{ responsables.lieunaissance }}</td> 
+                                                               
+                                                               <td>{{ responsables.email }} </td>
+                                                               <td> {{ responsables.activite }}  </td>
+                                                              <td>{{ responsables.revenu }} KMF </td>
+                                                               <td>{{ responsables.adresse }}</td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                              
+                                                         
+                                                          
+                                                      </table>
+                                                    
+                                                    </div>
+
+                                                    <div class="tab-pane fade" id="scolaire" role="tabpanel" aria-labelledby="scolaire">
+                                                       <table id="example2" class="table table-bordered table-hover">
+                                                            <thead>
+                                                            <tr class="table-success"> 
+                                                              <th>Anneé Scolaire </th>
+                                                              <th>Etablissement d'etude </th>
+                                                              <th>Série </th>
+                                                              <th>Mention obtenue </th>
+                                                              <th>Moyenne</th>
+                                                              <th>Justificatif </th>
+                                                              <th>Commentaire  </th>
+                                                           
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            
+                                                            {% for parcous in app.user.parcous_colaires  %}
+                                                            <tr>
+                                                               <td> {{  parcous.anneObtentionBac  ?  parcous.anneObtentionBac |date('Y-m-d') : ''  }} </td>
+                                                              <td> {{ parcous.ecole.libelle }}</td>
+                                                              <td> {{ parcous.serie }}  </td>
+                                                              <td> {{ parcous.mention }}</td>
+                                                              <td> {{ parcous.moyenne }}</td>
+                                                              <td> <a href="{{ asset('upload/'~ parcous.releve) }}">View brochure (PDF)</a></td>
+                                                              <td> {{ parcous.Commentaire }}</td>
+                                                             </tr>
+                                                            {% endfor %} 
+                                
+                                                            
+                                                          </tbody>
+                                                          
+                                                          
+                                                      </table>
+                                                    </div>
+
+                                                    <div class="tab-pane fade" id="universsitaire" role="tabpanel" aria-labelledby="universsitaire">
+                                                       <table id="example2" class="table table-bordered table-hover">
+                                                            <thead>
+                                                            <tr class="table-success">
+                                                              <th>Anneé Scolaire  </th>
+                                                              <th>Domaine d'etude   </th>
+                                                              <th>Niveau d'etude</th>
+                                                              <th>Mention </th>
+                                                              <th>  Université  </th>
+                                                              <th>  Moyenne obtenue </th>
+                                                              <th> Commentaire  </th>
+                                                              <th> Justificatif  </th>
+                                                            
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                           
+                                                            {% for parcours_universitaires in app.user.parcours_universitaires %}
+                                                               <tr>
+                                                              <td> {{ parcours_universitaires.AnneInscription ? parcours_universitaires.AnneInscription|date('Y-m-d') : ''  }}</td>
+                                                              <td> {{  parcours_universitaires.filiere  }} </td>
+                                                             
+                                                              <td> {{  parcours_universitaires.niveau.libelle }}</td>
+                                                              <td> {{  parcours_universitaires.mention }} </td>
+                                                              <td> {{ parcours_universitaires.titreUniveriste   }}</td>
+                                                              <td> {{ parcours_universitaires.moyenne }} /20 </td>
+                                                              <td>{{  parcours_universitaires.detail   }}</td>
+                                                              <td> <a href="{{ asset('upload/'~ parcours_universitaires.fichier) }}">View brochure (PDF)</a></td>
+                                                              
+                                                              
+                                                               </tr>
+                                                            {% endfor %}
+                                                          </tbody>
+                                                         
+                                                      </table>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <!-- /.card -->
+                                        </div>
+                                    </div>
+
+
+                                    {# Gestion des flux  #}
+
+                                    <div class="col-12 col-sm-12">
+                                        <div class="card card-primary card-tabs">
+                                            <div class="card-header p-0 pt-1">
+                                                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                                                   <li class="nav-item">
+                                                        <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#experience" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Experiences proffessionnelles
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#langue" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Competences lingustiques
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#entrant" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Flux entrant
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#sortant" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Flux sortant
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="card-body table-responsive p-0">
+                                                <div class="tab-content" id="custom-tabs-one-tabContent">
+                                                    <div class="tab-pane fade show active" id="experience" role="tabpanel" aria-labelledby="experience">
+                                                      <table id="example2" class="table table-bordered table-hover">
+                                                            <thead>
+                                                                <tr class="table table-success text-nowrap">
+                                                                   <th> Entreprise  </th>
+                                                                    <th> Poste occupé   </th>
+                                                                   <th>  date debut  </th>
+                                                                    <th> Date de fin </th>
+                                                                    <th class="text-nowrap"> Ville  </th>
+                                                                    <th>  Pays  </th>
+                                                                    <th>  Description  </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for experiences in app.user.experiences %}
+                                                               <tr>
+                                                                    <td >{{ experiences.entreprise }}</td>
+                                                                    <td>{{ experiences.poste }}  </td>
+                                                                    <td> {{ experiences.dateExperience ? experiences.dateExperience|date('Y-m-d') : ''  }}
+                                                                    </td>
+                                                                    <td>{{ experiences.datefin ? experiences.datefin|date('Y-m-d') : ''  }}</td>
+                                                                    <td>{{ experiences.ville }}</td>
+                                                                     <td>  {{ experiences.pays.libelle }}</td>
+                                                                    <td>  {{ experiences.detail }}  </p></td> 
+                                                                </tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                  <div class="tab-pane fade" id="langue" role="tabpanel" aria-labelledby="langue">
+                                                      <table id="example2" class="table table-bordered table-hover">
+                                                          <thead>
+                                                                <tr class="table table-success text-nowrap">
+                                                                    <th>Libellé  </th>
+                                                                    <th>Niveau   </th>
+                                                                    <th>avez-vous obtenu diplome ? </th>
+                                                                    <th>Description   </th>
+                                                                   
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for langue in app.user.langues %}
+                                                               <tr>
+                                                                    <td>{{ langue.libelle }}</td>
+                                                                    <td> {{ langue.niveau}}  </td>
+                                                                    <td> {{ langue.diplome }}</td>
+                                                                    <td>  {{ langue.detail}}</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                               
+                                                            </tbody>
+                                                            
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="tab-pane fade" id="entrant" role="tabpanel" aria-labelledby="entrant">
+                                                      <table id="example2" class="table table-bordered table-hover">
+                                                            <thead>
+                                                                <tr class="table-success text-nowrap">
+                                                                    <th>Date d'arrivé
+                                                                    </th>
+                                                                    <th>date de depart
+                                                                    </th>
+                                                                    <th>Diplome</th>
+                                                                    <th>Filiére d'etude
+                                                                    </th>
+                                                                    <th>Université
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for flux in app.user.fluxes %}
+                                                               <tr>
+                                                                    <td> {{ flux.dateArrive ? flux.dateArrive|date('Y-m-d') : ''  }} </td>
+                                                                    <td>{{ flux.depart ? flux.depart|date('Y-m-d') : ''  }} </td>
+                                                                    <td> {{ flux.diplome }}</td>
+                                                                    <td>{{ flux.filiere }}</td>
+                                                                    <td>{{ flux.titreUniversite }}</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                               
+                                                            </tbody>
+                                                            <thead>
+                                                                <tr class="table-success">
+                                                                    <th>Type d'université
+                                                                    </th>
+                                                                    <th>Niveau d'etude actuel
+                                                                    </th>
+                                                                    <th>
+                                                                        Avez-vous obtenu un travail ?
+                                                                    </th>
+                                                                    <th>
+                                                                        Etiez-vous boursier durant tes etudes ?
+                                                                    </th>
+                                                                    <th>Composant filiere
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for flux in app.user.fluxes %}
+                                                               <tr>
+                                                                   <td>{{  flux.TypeUniversite.libelle }}</td> 
+                                                                      <td> {{ flux.NiveauActuel.libelle   }} </td>  
+                                                                      <td>{{  flux.job }}</td> 
+                                                                     <td>{{  flux.boursier  }}</td>  
+                                                                     <td>{{  flux.Composant.libelle}}</td>  
+                                                                 </tr> 
+                                                               {% endfor %}   
+                                                            </tbody>
+                                                            <thead>
+                                                                <tr class="table-success text-nowrap">
+                                                                    <th>
+                                                                        Pays
+                                                                    </th>
+                                                                    <th>Avez-vous des projet pour ton pays ?
+                                                                    </th>
+                                                                    <th>Comment derouler tes etudes ?
+                                                                    </th>
+                                                                    <th>Souhaitez-vous poursuivre les etudes  ?
+                                                                    </th>
+                                                                    <th>Citez quelles difficultés rencontreés durant tes etudes
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for flux in app.user.fluxes  %}
+                                                              <tr>
+                                                                    <td>{{  flux.pays.libelle   }}</td>
+                                                                    <td>  {{  flux.projet  }} </td>
+                                                                    
+                                                                    <td>  {{ flux.detail }}  </td>
+                                                                  
+                                                                    <td> {{ flux.etudePoursuite }} </td>
+                                                                    
+                                                                    <td>  {{ flux.suggestion}}
+                                                                    </td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                                
+                                                            </tbody>
+
+                                                            <tfoot></tfoot>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="tab-pane fade" id="sortant" role="tabpanel" aria-labelledby="sortant">
+                                                        <table id="example2" class="table table-bordered table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Date de depart 
+                                                                    </th>
+                                                                    <th>Université inscrit 
+                                                                    </th>
+                                                                    <th>Domainde d'etude </th>
+                                                                    <th>Composant de domaine 
+                                                                    </th>
+                                                                    <th>Type d'université
+                                                                    </th>
+                                                                    <th>Pays 
+                                                                    </th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for fluxSortants in app.user.fluxSortants %}
+                                                                <tr>
+                                                                    <td> {{ fluxSortants.dateDepart ? fluxSortants.dateDepart|date('Y-m-d') : ''  }}   </td>
+                                                                    <td>{{ fluxSortants.universite  }} </td>
+                                                                    <td> {{ fluxSortants.filiere  }}</td>
+                                                                    <td>  {{ fluxSortants.composant.libelle}}  </td>
+                                                                    <td>  {{ fluxSortants.typeuniversite.libelle}}  </td>
+                                                                    <td>  {{ fluxSortants.pays.libelle}}  </td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                              
+                                                            </tbody>
+                                                            <thead>
+                                                                <tr>
+                                                                    
+                                                                    <th>Niveau d'etude actuel
+                                                                    </th>
+                                                                    <th> Beneficiez-vous de la bourse 
+                                                                    </th>
+                                                                    <th>Moyen d'existance à l'etranger 
+                                                                    </th>
+                                                                    <th>Avez-vous de famille à l'etranger 
+                                                                    </th>
+                                                                    <th>Adresse à l'etranger 
+                                                                    </th>
+                                                                    <th>Motivation 
+                                                                    </th>
+                                                                    
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for fluxSortants in app.user.fluxSortants %}
+                                                              <tr>
+                                                                    <td>{{ fluxSortants.niveau.libelle  }}</td>
+                                                                    <td> {{ fluxSortants.bourse }}  </td>
+                                                                   <td>{{ fluxSortants.priseCharche }} </td>
+                                                                   <td> {{ fluxSortants.famille }} </td>
+                                                                   
+                                                                    <td>{{ fluxSortants.adresse }} </td>
+                                                                    <td>{{ fluxSortants.motivation }} </td>
+                                                                     
+                                                                    
+                                                                </tr>
+                                                            {% endfor %}
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <!-- /.card -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.container-fluid -->
+                        </section>
+                    </div>
+                    <!-- /.row (main row) -->
+
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+
+            <div class="card-footer" style="padding-left:2%">
+
+                <button type="button" class="btn btn-success float-right">
+                    <i class="fas fa-paper-planeg"></i>
+                    Transmettre votre candidature
+                </button>
+              
+                <a href="{{ path("candidature") }}" class="btn btn-primary">
+                    <i class="fas fa-check-circle"></i>
+                     Restituer le panier 
+                </a>
+                
+                <button type="button" class="btn btn-info">
+                    <i class="fas fa-print"></i>
+                    Imprimer votre dossier
+                </button>
+                <button type="button" class="btn btn-danger">
+                    <i class="fas fa-backspace"></i>
+                    Annuler le dossier
+                </button>
+
+
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+    {% endblock %}

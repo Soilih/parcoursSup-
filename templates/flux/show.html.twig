@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-8">
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  Description du flux 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ flux.id }}</td>
+                    </tr>
+                    
+                    <tr>
+                        <th>Depart</th>
+                        <td>{{ flux.depart ? flux.depart|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Filiere</th>
+                        <td>{{ flux.filiere }}</td>
+                    </tr>
+                    <tr>
+                        <th>Diplome</th>
+                        <td>{{ flux.diplome }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresse</th>
+                        {# <td>{{ flux.adresse }}</td> #}
+                    </tr>
+                    <tr>
+                        <th>Ville</th>
+                        {# <td>{{ flux.ville }}</td> #}
+                    </tr>
+                    <tr>
+                        <th>TitreUniversite</th>
+                        {# <td>{{ flux.titreUniversite }}</td> #}
+                    </tr>
+                </tbody>
+            </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+
+    
+    
+{% endblock %}

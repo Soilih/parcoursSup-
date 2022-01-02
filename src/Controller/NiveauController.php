@@ -90,6 +90,6 @@ class NiveauController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('niveau_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('niveau_new', [], Response::HTTP_SEE_OTHER);
     }
 }

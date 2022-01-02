@@ -37,9 +37,9 @@ class EcoleType extends AbstractType
             ->add('Commune' , TextType::class)
             ->add('ile' , ChoiceType::class , [  
                 'choices'  => [
-                    'Ngazidja' => 'N',
-                    'Anjuan' => 'A',
-                    'Moheli' => 'M',
+                    'Ngazidja' => 'Ngazidja',
+                    'Anjuan' => 'Ndzouani',
+                    'Moheli' => 'Moheli',
                 ], 
                 'label' => 'selectionner votre ile ', 
                 'attr' => ['class' => 'form-control'],

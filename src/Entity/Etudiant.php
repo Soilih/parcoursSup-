@@ -2,99 +2,169 @@
 
 namespace App\Entity;
 
-use App\Repository\EtudiantRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
- * @ORM\Entity(repositoryClass=EtudiantRepository::class)
+ * Etudiant
+ *
+ * @ORM\Table(name="etudiant", indexes={@ORM\Index(name="IDX_717E22E3A6E44244", columns={"pays_id"}), @ORM\Index(name="IDX_717E22E3A76ED395", columns={"user_id"})})
+ * @ORM\Entity
+ * @Vich\Uploadable
  */
 class Etudiant
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $telephone;
-
-    /**
-     * @ORM\Column(type="date")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_naissance", type="date", nullable=false)
      */
     private $dateNaissance;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
      */
     private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="lieu_naissance", type="string", length=255, nullable=false)
      */
     private $lieuNaissance;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="nin", type="string", length=255, nullable=false)
      */
-    private $Nin;
+    private $nin;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string|null
+     *
+     * @ORM\Column(name="photo", type="string", length=255)
      */
     private $photo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="photo")
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nationalite", type="string", length=255, nullable=false)
      */
     private $nationalite;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255, nullable=false)
      */
     private $status;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="ile", type="string", length=255, nullable=false)
      */
     private $ile;
 
     /**
-     * @ORM\Column(type="date")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_valide", type="date", nullable=false)
      */
     private $dateValide;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="type_identite", type="string", length=255, nullable=false)
      */
     private $typeIdentite;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="pays_delivrance", type="string", length=255, nullable=false)
      */
     private $paysDelivrance;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="etudiants")
-     * @ORM\JoinColumn(nullable=false)
+     * @var string
+     *
+     * @ORM\Column(name="sexe", type="string", length=255, nullable=false)
+     */
+    private $sexe;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datefin", type="date", nullable=false)
+     */
+    private $datefin;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="activite", type="string", length=255, nullable=true)
+     */
+    private $activite;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="code_doosier", type="string", length=255, nullable=true)
+     */
+    private $codeDoosier;
+
+    /**
+     * @var \Pays
+     *
+     * @ORM\ManyToOne(targetEntity="Pays")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pays_id", referencedColumnName="id")
+     * })
+     */
+    private $pays;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
      */
     private $user;
 
@@ -123,30 +193,6 @@ class Etudiant
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(string $telephone): self
-    {
-        $this->telephone = $telephone;
 
         return $this;
     }
@@ -189,12 +235,12 @@ class Etudiant
 
     public function getNin(): ?string
     {
-        return $this->Nin;
+        return $this->nin;
     }
 
-    public function setNin(string $Nin): self
+    public function setNin(string $nin): self
     {
-        $this->Nin = $Nin;
+        $this->nin = $nin;
 
         return $this;
     }
@@ -204,7 +250,7 @@ class Etudiant
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): self
+    public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
 
@@ -283,6 +329,66 @@ class Etudiant
         return $this;
     }
 
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): self
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    public function getDatefin(): ?\DateTimeInterface
+    {
+        return $this->datefin;
+    }
+
+    public function setDatefin(\DateTimeInterface $datefin): self
+    {
+        $this->datefin = $datefin;
+
+        return $this;
+    }
+
+    public function getActivite(): ?string
+    {
+        return $this->activite;
+    }
+
+    public function setActivite(?string $activite): self
+    {
+        $this->activite = $activite;
+
+        return $this;
+    }
+
+    public function getCodeDoosier(): ?string
+    {
+        return $this->codeDoosier;
+    }
+
+    public function setCodeDoosier(?string $codeDoosier): self
+    {
+        $this->codeDoosier = $codeDoosier;
+
+        return $this;
+    }
+
+    public function getPays(): ?Pays
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?Pays $pays): self
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -294,4 +400,24 @@ class Etudiant
 
         return $this;
     }
+
+    public function setImageFile(File $photo = null)
+    {
+        $this->imageFile = $photo;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($photo) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+
 }

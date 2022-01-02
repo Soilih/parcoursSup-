@@ -57,6 +57,16 @@ class Responsable
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lieunaissance;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $activite;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +164,30 @@ class Responsable
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getLieunaissance(): ?string
+    {
+        return $this->lieunaissance;
+    }
+
+    public function setLieunaissance(?string $lieunaissance): self
+    {
+        $this->lieunaissance = $lieunaissance;
+
+        return $this;
+    }
+
+    public function getActivite(): ?string
+    {
+        return $this->activite;
+    }
+
+    public function setActivite(string $activite): self
+    {
+        $this->activite = $activite;
 
         return $this;
     }

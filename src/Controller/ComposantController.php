@@ -70,7 +70,7 @@ class ComposantController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('composant_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('composant_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('composant/edit.html.twig', [
@@ -90,6 +90,6 @@ class ComposantController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('composant_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('composant_new', [], Response::HTTP_SEE_OTHER);
     }
 }

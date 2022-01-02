@@ -70,7 +70,7 @@ class TypeUniversiteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('type_universite_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('type_universite_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('type_universite/edit.html.twig', [
@@ -90,6 +90,6 @@ class TypeUniversiteController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('type_universite_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('type_universite_new', [], Response::HTTP_SEE_OTHER);
     }
 }

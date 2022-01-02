@@ -2,53 +2,84 @@
 
 namespace App\Entity;
 
-use App\Repository\ExperienceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ExperienceRepository::class)
+ * Experience
+ *
+ * @ORM\Table(name="experience", indexes={@ORM\Index(name="IDX_590C103A76ED395", columns={"user_id"}), @ORM\Index(name="IDX_590C103A6E44244", columns={"pays_id"})})
+ * @ORM\Entity
  */
 class Experience
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_experience", type="date", nullable=false)
      */
     private $dateExperience;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="poste", type="string", length=255, nullable=false)
      */
     private $poste;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="entreprise", type="string", length=255, nullable=false)
      */
     private $entreprise;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string|null
+     *
+     * @ORM\Column(name="detail", type="text", length=0, nullable=true)
      */
     private $detail;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Pays::class, inversedBy="experiences")
-     */
-    private $pays;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=255, nullable=false)
      */
     private $ville;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="experiences")
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="datefin", type="date", nullable=true)
+     */
+    private $datefin;
+
+    /**
+     * @var \Pays
+     *
+     * @ORM\ManyToOne(targetEntity="Pays")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pays_id", referencedColumnName="id")
+     * })
+     */
+    private $pays;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
      */
     private $user;
 
@@ -98,21 +129,9 @@ class Experience
         return $this->detail;
     }
 
-    public function setDetail(string $detail): self
+    public function setDetail(?string $detail): self
     {
         $this->detail = $detail;
-
-        return $this;
-    }
-
-    public function getPays(): ?Pays
-    {
-        return $this->pays;
-    }
-
-    public function setPays(?Pays $pays): self
-    {
-        $this->pays = $pays;
 
         return $this;
     }
@@ -129,6 +148,30 @@ class Experience
         return $this;
     }
 
+    public function getDatefin(): ?\DateTimeInterface
+    {
+        return $this->datefin;
+    }
+
+    public function setDatefin(?\DateTimeInterface $datefin): self
+    {
+        $this->datefin = $datefin;
+
+        return $this;
+    }
+
+    public function getPays(): ?Pays
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?Pays $pays): self
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -140,4 +183,6 @@ class Experience
 
         return $this;
     }
+
+
 }

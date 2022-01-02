@@ -29,9 +29,21 @@ class TypeUniversite
      */
     private $universites;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Flux::class, mappedBy="typeUniversite")
+     */
+    private $fluxes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=FluxSortant::class, mappedBy="typeuniversite")
+     */
+    private $fluxSortants;
+
     public function __construct()
     {
         $this->universites = new ArrayCollection();
+        $this->fluxes = new ArrayCollection();
+        $this->fluxSortants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -75,6 +87,66 @@ class TypeUniversite
             // set the owning side to null (unless already changed)
             if ($universite->getType() === $this) {
                 $universite->setType(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Flux[]
+     */
+    public function getFluxes(): Collection
+    {
+        return $this->fluxes;
+    }
+
+    public function addFlux(Flux $flux): self
+    {
+        if (!$this->fluxes->contains($flux)) {
+            $this->fluxes[] = $flux;
+            $flux->setTypeUniversite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFlux(Flux $flux): self
+    {
+        if ($this->fluxes->removeElement($flux)) {
+            // set the owning side to null (unless already changed)
+            if ($flux->getTypeUniversite() === $this) {
+                $flux->setTypeUniversite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FluxSortant[]
+     */
+    public function getFluxSortants(): Collection
+    {
+        return $this->fluxSortants;
+    }
+
+    public function addFluxSortant(FluxSortant $fluxSortant): self
+    {
+        if (!$this->fluxSortants->contains($fluxSortant)) {
+            $this->fluxSortants[] = $fluxSortant;
+            $fluxSortant->setTypeuniversite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFluxSortant(FluxSortant $fluxSortant): self
+    {
+        if ($this->fluxSortants->removeElement($fluxSortant)) {
+            // set the owning side to null (unless already changed)
+            if ($fluxSortant->getTypeuniversite() === $this) {
+                $fluxSortant->setTypeuniversite(null);
             }
         }
 

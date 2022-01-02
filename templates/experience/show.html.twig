@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Experience{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-6">
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  Description : 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                 <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ experience.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>DateExperience</th>
+                            <td>{{ experience.dateExperience ? experience.dateExperience|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Poste</th>
+                            <td>{{ experience.poste }}</td>
+                        </tr>
+                        <tr>
+                            <th>Entreprise</th>
+                            <td>{{ experience.entreprise }}</td>
+                        </tr>
+                        <tr>
+                            <th>Detail</th>
+                            <td>{{ experience.detail }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ville</th>
+                            <td>{{ experience.ville }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                  <a  class="btn btn-md btn-outline-success" href="{{ path('experience_index') }}">consulter votre exeperience </a>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+ 

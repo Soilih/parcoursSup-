@@ -1,13 +1,27 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Ecole{% endblock %}
-
 {% block body %}
-    <h1>Edit Ecole</h1>
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-6">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+          
+                  MODIFIER LES INFORMATIONS D'UNE ECOLE 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              {{ include('ecole/_form.html.twig', {'button_label': 'Update'}) }}
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
 
-    {{ include('ecole/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('ecole_index') }}">back to list</a>
-
-    {{ include('ecole/_delete_form.html.twig') }}
 {% endblock %}

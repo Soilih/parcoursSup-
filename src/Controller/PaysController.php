@@ -70,7 +70,7 @@ class PaysController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('pays_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('pays_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('pays/edit.html.twig', [
@@ -90,6 +90,6 @@ class PaysController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('pays_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('pays_new', [], Response::HTTP_SEE_OTHER);
     }
 }

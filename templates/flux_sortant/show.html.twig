@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-8">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+             
+                  Description : 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ flux_sortant.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Bourse</th>
+                            <td>{{ flux_sortant.bourse }}</td>
+                        </tr>
+                        <tr>
+                            <th>PriseCharche</th>
+                            <td>{{ flux_sortant.priseCharche }}</td>
+                        </tr>
+                        <tr>
+                            <th>DateDepart</th>
+                            <td>{{ flux_sortant.dateDepart ? flux_sortant.dateDepart|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Universite</th>
+                            <td>{{ flux_sortant.universite }}</td>
+                        </tr>
+                        <tr>
+                            <th>Filiere</th>
+                            <td>{{ flux_sortant.filiere }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse</th>
+                            <td>{{ flux_sortant.adresse }}</td>
+                        </tr>
+                        <tr>
+                            <th>Famille</th>
+                            <td>{{ flux_sortant.famille }}</td>
+                        </tr>
+                        <tr>
+                            <th>Motivation</th>
+                            <td>{{ flux_sortant.motivation }}</td>
+                        </tr>
+                        <tr>
+                            <th>Suggeston</th>
+                            <td>{{ flux_sortant.suggeston }}</td>
+                        </tr>
+                    </tbody>
+                 </table>
+                 <a href="{{ path('flux_sortant_index') }}" class="btn btn-info">Mes flux sortant </a>   
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -2,38 +2,53 @@
 
 namespace App\Entity;
 
-use App\Repository\BourseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=BourseRepository::class)
+ * Bourse
+ *
+ * @ORM\Table(name="bourse", indexes={@ORM\Index(name="IDX_DDC2BC1CA76ED395", columns={"user_id"})})
+ * @ORM\Entity
  */
 class Bourse
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=255, nullable=false)
      */
     private $libelle;
 
     /**
-     * @ORM\Column(type="float")
+     * @var float
+     *
+     * @ORM\Column(name="montant", type="float", precision=10, scale=0, nullable=false)
      */
     private $montant;
 
     /**
-     * @ORM\Column(type="text")
+     * @var string
+     *
+     * @ORM\Column(name="detail", type="text", length=0, nullable=false)
      */
     private $detail;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="bourses")
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
      */
     private $user;
 
@@ -89,4 +104,6 @@ class Bourse
 
         return $this;
     }
+
+
 }

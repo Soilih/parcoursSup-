@@ -2,70 +2,113 @@
 
 namespace App\Entity;
 
-use App\Repository\ParcoursUniversitaireRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ParcoursUniversitaireRepository::class)
+ * ParcoursUniversitaire
+ *
+ * @ORM\Table(name="parcours_universitaire", indexes={@ORM\Index(name="IDX_996FC494A6E44244", columns={"pays_id"}), @ORM\Index(name="IDX_996FC4942A52F05F", columns={"universite_id"}), @ORM\Index(name="IDX_996FC494A76ED395", columns={"user_id"}), @ORM\Index(name="IDX_996FC494B3E9C81", columns={"niveau_id"})})
+ * @ORM\Entity
  */
 class ParcoursUniversitaire
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="anne_inscription", type="date", nullable=false)
      */
-    private $AnneInscription;
+    private $anneInscription;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="filiere", type="string", length=255, nullable=false)
      */
     private $filiere;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Niveau::class, inversedBy="parcoursUniversitaires")
-     */
-    private $niveau;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="mention", type="string", length=255, nullable=false)
      */
     private $mention;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="fichier", type="string", length=255, nullable=false)
      */
     private $fichier;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="detail", type="string", length=255, nullable=false)
      */
     private $detail;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="moyenne", type="string", length=255, nullable=false)
      */
     private $moyenne;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Universite::class, inversedBy="parcoursUniversitaires")
-     */
-    private $universite;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="titre_univeriste", type="string", length=255, nullable=false)
      */
     private $titreUniveriste;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="parcoursUniversitaires")
+     * @var \Universite
+     *
+     * @ORM\ManyToOne(targetEntity="Universite")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="universite_id", referencedColumnName="id")
+     * })
+     */
+    private $universite;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
      */
     private $user;
+
+    /**
+     * @var \Pays
+     *
+     * @ORM\ManyToOne(targetEntity="Pays")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pays_id", referencedColumnName="id")
+     * })
+     */
+    private $pays;
+
+    /**
+     * @var \Niveau
+     *
+     * @ORM\ManyToOne(targetEntity="Niveau")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="niveau_id", referencedColumnName="id")
+     * })
+     */
+    private $niveau;
 
     public function getId(): ?int
     {
@@ -74,12 +117,12 @@ class ParcoursUniversitaire
 
     public function getAnneInscription(): ?\DateTimeInterface
     {
-        return $this->AnneInscription;
+        return $this->anneInscription;
     }
 
-    public function setAnneInscription(\DateTimeInterface $AnneInscription): self
+    public function setAnneInscription(\DateTimeInterface $anneInscription): self
     {
-        $this->AnneInscription = $AnneInscription;
+        $this->anneInscription = $anneInscription;
 
         return $this;
     }
@@ -92,18 +135,6 @@ class ParcoursUniversitaire
     public function setFiliere(string $filiere): self
     {
         $this->filiere = $filiere;
-
-        return $this;
-    }
-
-    public function getNiveau(): ?Niveau
-    {
-        return $this->niveau;
-    }
-
-    public function setNiveau(?Niveau $niveau): self
-    {
-        $this->niveau = $niveau;
 
         return $this;
     }
@@ -156,18 +187,6 @@ class ParcoursUniversitaire
         return $this;
     }
 
-    public function getUniversite(): ?Universite
-    {
-        return $this->universite;
-    }
-
-    public function setUniversite(?Universite $universite): self
-    {
-        $this->universite = $universite;
-
-        return $this;
-    }
-
     public function getTitreUniveriste(): ?string
     {
         return $this->titreUniveriste;
@@ -176,6 +195,18 @@ class ParcoursUniversitaire
     public function setTitreUniveriste(string $titreUniveriste): self
     {
         $this->titreUniveriste = $titreUniveriste;
+
+        return $this;
+    }
+
+    public function getUniversite(): ?Universite
+    {
+        return $this->universite;
+    }
+
+    public function setUniversite(?Universite $universite): self
+    {
+        $this->universite = $universite;
 
         return $this;
     }
@@ -191,4 +222,30 @@ class ParcoursUniversitaire
 
         return $this;
     }
+
+    public function getPays(): ?Pays
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?Pays $pays): self
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?Niveau
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(?Niveau $niveau): self
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+
+
 }

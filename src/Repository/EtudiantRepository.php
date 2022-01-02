@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Etudiant;
+use App\Entity\Langue;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,10 +20,10 @@ class EtudiantRepository extends ServiceEntityRepository
         parent::__construct($registry, Etudiant::class);
     }
 
-    // /**
+    /**
     //  * @return Etudiant[] Returns an array of Etudiant objects
     //  */
-    /*
+   
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('e')
@@ -34,7 +35,7 @@ class EtudiantRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+  
 
     /*
     public function findOneBySomeField($value): ?Etudiant
@@ -47,4 +48,11 @@ class EtudiantRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function listeDesetudiant($em)
+        {
+            $query = $em->createQuery('SELECT * FROM  Etudiant ');
+           
+            $users = $query->getResult();
+        }
 }

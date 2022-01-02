@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Votre compte existe dejà")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -59,10 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $etudiants;
 
-    /**
-     * @ORM\OneToMany(targetEntity=ParcousColaire::class, mappedBy="user")
-     */
-    private $parcousColaires;
+    
 
     /**
      * @ORM\OneToMany(targetEntity=ParcoursUniversitaire::class, mappedBy="user")
@@ -84,6 +81,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $responsables;
 
+       /**
+     * @ORM\OneToMany(targetEntity=Flux::class, mappedBy="user")
+     */
+    private $fluxes;
+    
     /**
      * @ORM\OneToMany(targetEntity=Bourse::class, mappedBy="user")
      */
@@ -93,6 +95,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Ecole::class, mappedBy="user")
      */
     private $ecoles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ParcousColaire::class, mappedBy="user")
+     */
+    private $parcousColaires;
+
+    /**
+     * @ORM\OneToMany(targetEntity=FluxSortant::class, mappedBy="user")
+     */
+    private $fluxSortants;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Candidature::class, mappedBy="user")
+     */
+    private $candidatures;
+
+  
 
     public function __construct()
     {
@@ -104,6 +123,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->responsables = new ArrayCollection();
         $this->bourses = new ArrayCollection();
         $this->ecoles = new ArrayCollection();
+        $this->fluxes = new ArrayCollection();
+        $this->fluxSortants = new ArrayCollection();
+        //$this->dossiers = new ArrayCollection();
+        $this->candidatures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -261,40 +284,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|ParcousColaire[]
-     */
-    public function getParcousColaires(): Collection
-    {
-        return $this->parcousColaires;
-    }
-
-    public function addParcousColaire(ParcousColaire $parcousColaire): self
-    {
-        if (!$this->parcousColaires->contains($parcousColaire)) {
-            $this->parcousColaires[] = $parcousColaire;
-            $parcousColaire->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParcousColaire(ParcousColaire $parcousColaire): self
-    {
-        if ($this->parcousColaires->removeElement($parcousColaire)) {
-            // set the owning side to null (unless already changed)
-            if ($parcousColaire->getUser() === $this) {
-                $parcousColaire->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection|ParcoursUniversitaire[]
      */
-    public function getParcoursUniversitaires(): Collection
+    public function getparcours_universitaires(): Collection
     {
         return $this->parcoursUniversitaires;
     }
@@ -470,4 +465,152 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    
+    /**
+     * @return Collection|Flux[]
+     */
+    public function getfluxes(): Collection
+    {
+        return $this->fluxes;
+    }
+
+    public function addFlux(Flux $fluxes): self
+    {
+        if (!$this->fluxes->contains($fluxes)) {
+            $this->fluxes[] = $fluxes;
+            $fluxes->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFlux(Flux $fluxes): self
+    {
+        if ($this->langues->removeElement($fluxes)) {
+            // set the owning side to null (unless already changed)
+            if ($fluxes->getUser() === $this) {
+                $fluxes->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+    
+
+     /**
+     * @return Collection|ParcousColaire[]
+     */
+    public function getparcous_colaires(): Collection
+    {
+        return $this->parcousColaires;
+    }
+
+    public function addParcousColaire(ParcousColaire $parcousColaire): self
+    {
+        if (!$this->parcousColaires->contains($parcousColaire)) {
+            $this->parcousColaires[] = $parcousColaire;
+            $parcousColaire->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParcousColaire(ParcousColaire $parcousColaire): self
+    {
+        if ($this->parcousColaires->removeElement($parcousColaire)) {
+            // set the owning side to null (unless already changed)
+            if ($parcousColaire->getUser() === $this) {
+                $parcousColaire->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FluxSortant[]
+     */
+    public function getFluxSortants(): Collection
+    {
+        return $this->fluxSortants;
+    }
+
+    public function addFluxSortant(FluxSortant $fluxSortant): self
+    {
+        if (!$this->fluxSortants->contains($fluxSortant)) {
+            $this->fluxSortants[] = $fluxSortant;
+            $fluxSortant->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFluxSortant(FluxSortant $fluxSortant): self
+    {
+        if ($this->fluxSortants->removeElement($fluxSortant)) {
+            // set the owning side to null (unless already changed)
+            if ($fluxSortant->getUser() === $this) {
+                $fluxSortant->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    /**
+     * @return Collection|ParcoursUniversitaire[]
+     */
+    public function getParcoursUniversitaires(): Collection
+    {
+        return $this->parcoursUniversitaires;
+    }
+
+    /**
+     * @return Collection|ParcousColaire[]
+     */
+    public function getParcousColaires(): Collection
+    {
+        return $this->parcousColaires;
+    }
+
+    /**
+     * @return Collection|Candidature[]
+     */
+    public function getCandidatures(): Collection
+    {
+        return $this->candidatures;
+    }
+
+    public function addCandidature(Candidature $candidature): self
+    {
+        if (!$this->candidatures->contains($candidature)) {
+            $this->candidatures[] = $candidature;
+            $candidature->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidature(Candidature $candidature): self
+    {
+        if ($this->candidatures->removeElement($candidature)) {
+            // set the owning side to null (unless already changed)
+            if ($candidature->getUser() === $this) {
+                $candidature->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+    
 }

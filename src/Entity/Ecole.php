@@ -2,97 +2,118 @@
 
 namespace App\Entity;
 
-use App\Repository\EcoleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EcoleRepository::class)
+ * Ecole
+ *
+ * @ORM\Table(name="ecole", indexes={@ORM\Index(name="IDX_9786AACA76ED395", columns={"user_id"})})
+ * @ORM\Entity
  */
 class Ecole
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=255, nullable=false)
      */
     private $libelle;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
      */
     private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="telephone", type="string", length=255, nullable=false)
      */
     private $telephone;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="detail", type="string", length=255, nullable=false)
      */
     private $detail;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="ile", type="string", length=255, nullable=false)
      */
     private $ile;
 
     /**
-     * @ORM\OneToMany(targetEntity=ParcousColaire::class, mappedBy="ecole")
+     * @var string
+     *
+     * @ORM\Column(name="nom_chef", type="string", length=255, nullable=false)
      */
-    private $parcousColaires;
+    private $nomChef;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="ecoles")
+     * @var string
+     *
+     * @ORM\Column(name="type_ecole", type="string", length=255, nullable=false)
      */
-    private $user;
+    private $typeEcole;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $NomChef;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $TypeEcole;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="site", type="string", length=255, nullable=false)
      */
     private $site;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @var float|null
+     *
+     * @ORM\Column(name="postal", type="float", precision=10, scale=0, nullable=true)
      */
-    private $Postal;
+    private $postal;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="commune", type="string", length=255, nullable=false)
      */
-    private $Commune;
+    private $commune;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="fax", type="string", length=255, nullable=false)
      */
-    private $Fax;
+    private $fax;
 
-    public function __construct()
-    {
-        $this->parcousColaires = new ArrayCollection();
-    }
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -171,68 +192,26 @@ class Ecole
         return $this;
     }
 
-    /**
-     * @return Collection|ParcousColaire[]
-     */
-    public function getParcousColaires(): Collection
-    {
-        return $this->parcousColaires;
-    }
-
-    public function addParcousColaire(ParcousColaire $parcousColaire): self
-    {
-        if (!$this->parcousColaires->contains($parcousColaire)) {
-            $this->parcousColaires[] = $parcousColaire;
-            $parcousColaire->setEcole($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParcousColaire(ParcousColaire $parcousColaire): self
-    {
-        if ($this->parcousColaires->removeElement($parcousColaire)) {
-            // set the owning side to null (unless already changed)
-            if ($parcousColaire->getEcole() === $this) {
-                $parcousColaire->setEcole(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getNomChef(): ?string
     {
-        return $this->NomChef;
+        return $this->nomChef;
     }
 
-    public function setNomChef(string $NomChef): self
+    public function setNomChef(string $nomChef): self
     {
-        $this->NomChef = $NomChef;
+        $this->nomChef = $nomChef;
 
         return $this;
     }
 
     public function getTypeEcole(): ?string
     {
-        return $this->TypeEcole;
+        return $this->typeEcole;
     }
 
-    public function setTypeEcole(string $TypeEcole): self
+    public function setTypeEcole(string $typeEcole): self
     {
-        $this->TypeEcole = $TypeEcole;
+        $this->typeEcole = $typeEcole;
 
         return $this;
     }
@@ -251,37 +230,51 @@ class Ecole
 
     public function getPostal(): ?float
     {
-        return $this->Postal;
+        return $this->postal;
     }
 
-    public function setPostal(?float $Postal): self
+    public function setPostal(?float $postal): self
     {
-        $this->Postal = $Postal;
+        $this->postal = $postal;
 
         return $this;
     }
 
     public function getCommune(): ?string
     {
-        return $this->Commune;
+        return $this->commune;
     }
 
-    public function setCommune(string $Commune): self
+    public function setCommune(string $commune): self
     {
-        $this->Commune = $Commune;
+        $this->commune = $commune;
 
         return $this;
     }
 
     public function getFax(): ?string
     {
-        return $this->Fax;
+        return $this->fax;
     }
 
-    public function setFax(string $Fax): self
+    public function setFax(string $fax): self
     {
-        $this->Fax = $Fax;
+        $this->fax = $fax;
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+
 }

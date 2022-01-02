@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-6">
+            <div class="card card-success">
+              <div class="card-header" style="font-szie:24px">
+                <h3 class="card-title">
+                  
+                  Enregistrer votre identité 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                  {{ include('etudiant/_form.html.twig') }}
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}

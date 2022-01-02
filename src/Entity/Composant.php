@@ -2,28 +2,36 @@
 
 namespace App\Entity;
 
-use App\Repository\ComposantRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ComposantRepository::class)
+ * Composant
+ *
+ * @ORM\Table(name="composant")
+ * @ORM\Entity
  */
 class Composant
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=255, nullable=false)
      */
     private $libelle;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="detail", type="string", length=255, nullable=false)
      */
     private $detail;
 
@@ -55,4 +63,6 @@ class Composant
 
         return $this;
     }
+
+
 }

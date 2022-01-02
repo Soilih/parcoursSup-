@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-6">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                
+                Description : 
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                 <table class="table">
+                 <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ parcous_colaire.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Anne Obtention Bac</th>
+                        <td>{{ parcous_colaire.anneObtentionBac ? parcous_colaire.anneObtentionBac|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Serie</th>
+                        <td>{{ parcous_colaire.serie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Mention</th>
+                        <td>{{ parcous_colaire.mention }}</td>
+                    </tr>
+                    <tr>
+                        <th>Moyenne</th>
+                        <td>{{ parcous_colaire.moyenne }}</td>
+                    </tr>
+                    <tr>
+                        <th>Releve</th>
+                         <td> 
+                         <a href="{{ asset('upload/'~ parcous_colaire.releve) }}">View brochure (PDF)</a>
+                         </td>
+                    </tr>
+                    <tr>
+                        <th>Attestation</th>
+                        <td>
+                          <a href="{{ asset('upload/'~ parcous_colaire.attestation) }}">View brochure (PDF)</a>
+                        </td>
+                      </tr>
+                        </tbody>
+                 
+                    </table>
+                     <a href="{{ path('parcous_colaire_index') }}" class="btn btn-info"> consulter votre  parcours scolaire  </a>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+
+{% endblock %}

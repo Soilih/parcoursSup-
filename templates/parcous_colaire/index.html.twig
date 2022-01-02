@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-12">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                 
+                  Gestion parcours scolaire 
+                </h3>
+               <a  href="{{ path("parcous_colaire_new") }}" class="btn btn-sm btn-primary" style="float:right">Ajouter un parcours scolaire </a>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                 <table class="table">
+                <thead>
+                    <tr>
+                        
+                        <th>Année d'obtention Bac</th>
+                        <th>Série</th>
+                        <th>Mention</th>
+                        <th>Moyenne</th>
+                        <th>Niveau d'etude</th>
+                        <th>Ecole </th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for parcous_colaire in app.user.parcous_colaires %}
+                    <tr>
+                        
+                        <td>{{ parcous_colaire.anneObtentionBac ? parcous_colaire.anneObtentionBac|date('Y-m-d') : '' }}</td>
+                        <td>{{ parcous_colaire.serie }}</td>
+                        <td>{{ parcous_colaire.mention }}</td>
+                        <td>{{ parcous_colaire.moyenne }}</td>
+                        <td>{{ parcous_colaire.Niveau.libelle}}</td>
+                        <td>{{ parcous_colaire.ecole.libelle }}</td>
+                        <td>
+                            <a  class="btn btn-primary btn-sm"  href="{{ path('parcous_colaire_show', {'id': parcous_colaire.id}) }}"><i style="color:bleu" class="fa fa-eye"></i></a>
+                            <a  class="btn btn-primary btn-sm" href="{{ path('parcous_colaire_edit', {'id': parcous_colaire.id}) }}">  <i class="fas fa-pencil-alt">
+                              </i></a>
+                            <div style="display: inline-block;padding-left:2% ; color:red">{{ include('parcous_colaire/_delete_form.html.twig') }} </div> 
+                </td>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+             </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+    
