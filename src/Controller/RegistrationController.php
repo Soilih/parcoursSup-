@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
+use App\Controller\Date;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -29,6 +30,7 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
         $user = new User();
+        $user -> setCode($this->genererCode());
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -61,6 +63,20 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+    public function genererCode(){
+       $user =  new User ; 
+       $dt = Date("Y");
+       $hr = Date("H");
+       $rd =  random_int(100, 9999);
+       for($i=0 ; $i<$rd ; $i++){
+          $cod = "SUP".$rd.$dt.$hr ; 
+       }
+        //je genere une valeur aleatoire entre 1 et 100 
+        
+
+        return $cod ; 
     }
 
     /**

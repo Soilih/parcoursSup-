@@ -1,0 +1,64 @@
+
+
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  <div class="content-wrapper">
+     <div class="row" style="padding-left:2%;padding-top:2%">
+          <div class="col-md-12">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                  LISTE DES  FLUX SORTANT 
+                   </h3>
+                    {# <a  href="{{ path("ecole_new") }}" class="btn btn-primary" style="float:right">Ajouter une ecole </a> #}
+                </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="datatable" class="table table-bordered table-hover">
+               
+                    <thead>
+                        <tr>
+                            <th>Nom de famille </th>
+                            <th>Prenom  </th>
+                            <th>Adresse à l'etranger  </th>
+                            
+                            <th>  Date de depart  </th>
+                            <th>Pays d'etude  </th>
+                            <th>Niveau d'etude   </th>
+                            <th>Titre de l'université </th>
+                            <th>Filiere d'etude </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for et in nos_etudiant %}
+                        <tr>
+                        
+                            <td>{{ et.nom }}</td>
+                             <td>{{ et.prenom }}</td>
+                             <td>{{ et.adresse}}</td>
+                             <td>{{ et.dateDepart ? et.dateDepart |date('d/m/Y' , false) : '' }}</td>
+                             <td>{{ et.libelle}}</td> 
+                             <td>{{ et.lib }}</td> 
+                             <td>{{ et.universite }}</td>
+                             <td>{{ et.filiere }}</td> 
+                            
+                            
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                
+
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}

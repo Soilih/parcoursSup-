@@ -5,8 +5,11 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <title>Parcous sup </title>
+{% include "link/link_css.html.twig" %}
 
-   {% include "link/link_css.html.twig" %}
+ {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+
+</head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
@@ -14,7 +17,7 @@
   
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-fixed-to top navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-fixed-to top navbar-expand navbar-white navbar-light" id="cache">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
 
@@ -23,25 +26,28 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ path("_login_redirect") }}" class="nav-link">Home</a>
+        <a href="{{ path("_login_redirect") }}" id="home" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Rapport </a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ path("profile") }}" class="nav-link">Profile </a>
+      {% if  is_granted("ROLE_ADMIN")  %}
+         <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ path("chart") }}" class="nav-link"> Statistique </a>
+       </li>
+      {% endif %}
+     
+      <li class="nav-item d-none d-sm-inline-block" >
+        <a href="{{ path("profile") }}" id="profile" class="nav-link">Profile </a>
       </li>
     </ul>
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto" >
       <!-- Navbar Search -->
       <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
+       
+         
         </a>
         <div class="navbar-search-block">
           <form class="form-inline">
@@ -63,21 +69,19 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
+          <i style="font-size:24px" class="far fa-user"></i>
+         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
               <img src="{{ asset("dist/img/user1-128x128.jpg") }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  {{ app.user.nom}}
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                <h4 class="dropdown-item-title">
+                   <strong> {{ app.user.nom}} </strong> 
+                </h4>
+                <p class="text-sm"> <strong>{{ app.user.code }}</strong></p>
+               
               </div>
             </div>
             <!-- Message End -->
@@ -109,13 +113,13 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#469440">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#469440" id="na">
     
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="" class="img-circle elevation-2" alt="User Image">
+         
         </div>
         
       </div>
@@ -137,6 +141,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+           <div class="bloc-userss">
           <li class="nav-item menu-open">
             <a href="{{ path("_login_redirect") }}" class="nav-link active">
               <p>
@@ -146,7 +151,7 @@
             
           </li>
           {% if not is_granted("ROLE_ADMIN")  %}
-          
+         
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -244,7 +249,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Scolarité 
+               Une anneé au lyceé 
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -252,7 +257,7 @@
               <li class="nav-item">
                 <a href="{{ path("parcous_colaire_new") }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Ajouter Cursus scolaire </p>
+                  <p>Ajouter une anneé au lyceé  </p>
                 </a>
               </li>
               <li class="nav-item">
@@ -301,6 +306,7 @@
               </li>
             </ul>
           </li>
+        </div>
            
            {% else  %}  
            <li class="nav-item">
@@ -319,13 +325,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ path("flux_index") }}" class="nav-link">
+                <a href="{{ path("listeResponsable") }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Liste des responsables  </p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ path("flux_index") }}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                  Annuaire des responsables  
                 </a>
@@ -447,7 +453,7 @@
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{ path("ecole_new") }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa- nav-icon"></i>
                       <p>Ajouter une ecole    </p>
                     </a>
                   </li>
@@ -464,40 +470,31 @@
             <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-book"></i>
-                  
                   Gestion flux 
-                  
-                  
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ path("flux_index") }}" class="nav-link">
+                    <a href="{{ path("listetudiantdetail") }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Flux entrant    </p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ path("flux_index") }}" class="nav-link">
+                    <a href="{{ path("fluxStantEtudiant") }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       Flux sortant
+                    </a>
+                  </li>
+                   <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      Flux restant 
                     </a>
                   </li>
                 
                 </ul>
               </li>
-              {# Statistique   #}
-              <li class="nav-item">
-                <a href="{{ path("flux_index") }}" class="nav-link">
-                  <i class="nav-icon fas fa-book"></i>
-                 Statistique
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ path("flux_index") }}" class="nav-link">
-                  <i class="nav-icon fas fa-book"></i>
-               Geolocalisaton 
-                </a>
-              </li>
+              
 
           {% endif %}
         </ul>
@@ -515,7 +512,8 @@
     
    {% block body %}{% endblock %}
 
-    
-{% include "link/link_js.html.twig" %}   
+      {% include "link/link_js.html.twig" %}   
+      {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+
 </body>
 </html>

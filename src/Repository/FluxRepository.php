@@ -3,6 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Flux;
+use App\Entity\User;
+use App\Entity\Etudiant;
+use App\Entity\Pays;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,6 +21,32 @@ class FluxRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Flux::class);
     }
+
+    
+    /**
+     * @return Flux[]
+     * @return Etudiant[]
+     * @return User[]
+     */
+    public function listeFluxEtudiant(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+                           
+            "SELECT  f.filiere , e.nom , u.tel , u.email , e.adresse ,  e.prenom , p.libelle , f.titreUniversite , f.diplome 
+             FROM App\Entity\Flux f   , App\Entity\User u ,  App\Entity\Etudiant e , App\Entity\Pays p 
+             where f.user = u.id  AND e.user = u.id  AND  f.pays = p.id order by e.nom ASC  
+              "
+             
+        );
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+    
+    
 
     // /**
     //  * @return Flux[] Returns an array of Flux objects

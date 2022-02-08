@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\TypeUniversite;
 use App\Form\TypeUniversiteType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/type/universite")
+ * @Route("/admin/type/universite")
  */
 class TypeUniversiteController extends AbstractController
 {

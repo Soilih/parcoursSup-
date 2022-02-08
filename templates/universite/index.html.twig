@@ -11,15 +11,16 @@
                   Liste des Universités 
                 </h3>
                <a  href="{{ path("universite_new") }}" class="btn btn-sm btn-primary" style="float:right">Ajouter université  </a>
+             
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                 <table class="table">
+                 <table  id="datatable" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            
                             <th>Nom de l'université </th>
-                            <th>Type d'université </th>
+                            <th>Type d'enseignment superieur  </th>
                             <th>Pays</th>
                             <th>Site</th>
                             <th>Postal</th>
@@ -31,7 +32,7 @@
                     <tbody>
                     {% for universite in universites %}
                         <tr>
-                            <td>{{ universite.id }}</td>
+                            
                             <td>{{ universite.titre }}</td>
                             <td>{{ universite.type.libelle}}</td>
                             <td>{{ universite.pays.libelle}}</td>
@@ -61,5 +62,8 @@
 </div>
 
 {% endblock %}
+
+
+
 
 

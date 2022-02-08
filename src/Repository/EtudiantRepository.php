@@ -2,10 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Etudiant;
-use App\Entity\Langue;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use   App\Entity\Etudiant;
+use   App\Entity\Langue;
+use   App\Entity\User;
+use   App\Entity\Experience;
+use   App\Entity\ParcoursUniversitaire;
+use   App\Entity\ParcousColaire;
+use   App\Entity\Responsable;
+use   App\Entity\Flux;
+use   App\Entity\FluxSortant;
+use   App\Entity\Pays;
+use   App\Entity\Niveau;
+use   Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use   Doctrine\Persistence\ManagerRegistry;
+use   Doctrine\ORM\EntityManagerInterface;
+use   Doctrine\ORM\Query\Parameter;
+
 
 /**
  * @method Etudiant|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,19 +33,23 @@ class EtudiantRepository extends ServiceEntityRepository
     }
 
     /**
-    //  * @return Etudiant[] Returns an array of Etudiant objects
-    //  */
+     * @return Etudiant[] Returns an array of Etudiant objects
+     * @return User[] 
+     */
    
-    public function findByExampleField($value)
+    public function findByExampleField($value )
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+      $entityManager = $this->getEntityManager();
+      $query = $entityManager->createQuery(
+            "SELECT e.nom  , u.email , u.tel , l.libelle  
+            FROM App\Entity\Etudiant e   
+            LEFT JOIN  User ON  e.id = u.id  AND 
+            LEFT JOIN  Langue   ON  l.user = u.id 
+
+            WHERE     u.id = :id"
+        )
+        ->setParameter('id', $value);
+         return $query->getResult();
     }
   
 
@@ -48,11 +64,47 @@ class EtudiantRepository extends ServiceEntityRepository
         ;
     }
     */
+   
 
-    public function listeDesetudiant($em)
-        {
-            $query = $em->createQuery('SELECT * FROM  Etudiant ');
-           
-            $users = $query->getResult();
-        }
+
+    // public function listeDesetudiant($id)
+    // {
+       
+    //     return $this->createQueryBuilder('e')
+    //    // ->leftJoin("e.user", "u")->addSelect("u") 
+    //    // ->leftJoin("e.pays", "p")->addSelect("p") 
+    //     ->setParameter('e.id ', $id)
+    //     ->orderBy('e.id', 'ASC')
+    //     ->andWhere("e.id = :id  ")
+    //     ->getQuery()
+    //     ->getSingleResult()   
+    //     ;
+    // }
+
+    /**
+     * @return Flux[]
+     * @return Etudiant[]
+     * @return User[]
+     * @param $id
+     * @throws \Exception
+     */
+    // public function listeEtudiant(): array
+    // {
+    //     $entityManager = $this->getEntityManager();
+
+    //     $query = $entityManager->createQuery(
+                           
+    //         "SELECT  f.filiere , e.nom , u.tel , u.email , e.adresse ,  e.prenom , p.libelle , f.titreUniversite , f.diplome 
+    //          FROM App\Entity\Flux f   , App\Entity\User u ,  App\Entity\Etudiant e , App\Entity\Pays p 
+    //          where f.user = u.id  AND e.user = u.id  AND  f.pays = p.id "
+    //     );
+    //    // $query->setParameter("u" , $id )
+    //      ->$query->getQuery();
+    //     // returns an array of Product objects
+    //     return  $query->getResult();
+    // }
+
+
+   
+   
 }

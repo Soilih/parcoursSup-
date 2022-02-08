@@ -28,6 +28,11 @@ class Pays
      */
     private $libelle;
 
+    /**
+     * @ORM\Column(type="string", length=7)
+     */
+    private $colors;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -41,6 +46,18 @@ class Pays
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getColors(): ?string
+    {
+        return $this->colors;
+    }
+
+    public function setColors(string $colors): self
+    {
+        $this->colors = $colors;
 
         return $this;
     }

@@ -38,9 +38,13 @@
                             <td colspan="3">no records found</td>
                         </tr>
                     {% endfor %}
+                   
                     </tbody>
                 </table>
+               <div class="navigation">
+                  {{ knp_pagination_render(pays) }}
               </div>
+                            </div>
               <!-- /.card-body -->
             </div>
           </div>  

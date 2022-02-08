@@ -32,13 +32,15 @@
                 </div>
 
                 <h3 class="profile-username text-center">{{ app.user.nom  }}</h3>
-                <ul class="list-group list-group-unbordered mb-3">
+                <ul class="list-group list-group-unbordered mb-3" >
                   <li class="list-group-item">
                     <b>Email : </b> <a class="float-right">{{app.user.email }}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Telephone : </b> <a class="float-right">{{app.user.tel }}</a>
-                    
+                    <b>Telephone : </b> <a  class="float-right">{{app.user.tel }}</a>
+                 </li>
+                  <li class="list-group-item">
+                  <b>Identifiant  :  </b> <a class="float-right"> {{ app.user.code }}</a>
                   </li>
                   </li>
                   <!-- ici j'affiche  -->

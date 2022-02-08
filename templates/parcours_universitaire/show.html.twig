@@ -4,55 +4,61 @@
 <div class="wrapper">
   <div class="content-wrapper">
      <div class="row" style="padding-left:2%;padding-top:2%">
-          <div class="col-md-8">
-            <div class="card card-default">
+          <div class="col-md-10">
+            <div class="card card-success">
               <div class="card-header">
                 <h3 class="card-title">
-                  <i class="fas fa-exclamation-triangle"></i>
-                  Votre cursus universitaire 
+                  
+                 Description de votre cursus universitaire 
                 </h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                           <table class="table table-boredered">
-                    <tbody>
+                  <table class="table table-boredered table-striped">
+                    <tbody style="font-size:18px">
                         <tr>
-                            <th>Id</th>
-                            <td>{{ parcours_universitaire.id }}</td>
-                        </tr>
-                        <tr>
-                            <th>AnneInscription</th>
+                            <th>Une anneé d'etude supérieur : </th>
                             <td>{{ parcours_universitaire.AnneInscription ? parcours_universitaire.AnneInscription|date('Y-m-d') : '' }}</td>
                         </tr>
                         <tr>
-                            <th>Filiere</th>
+                            <th>Filiere d'etude : </th>
                             <td>{{ parcours_universitaire.filiere }}</td>
                         </tr>
                         <tr>
-                            <th>Mention</th>
+                            <th>Mention obtenue : </th>
                             <td>{{ parcours_universitaire.mention }}</td>
                         </tr>
                         <tr>
-                            <th>Fichier</th>
+                            <th>Justificatif : </th>
                             <td>
                               <a href="{{ asset('upload/'~ parcours_universitaire.fichier) }}">View brochure (PDF)</a>
                             </td>
                         </tr>
                         <tr>
-                            <th>Detail</th>
+                            <th>Description de votre cursus : </th>
                             <td>{{ parcours_universitaire.detail }}</td>
                         </tr>
                         <tr>
-                            <th>Moyenne</th>
+                            <th>Moyenne annuelle : </th>
                             <td>{{ parcours_universitaire.moyenne }}</td>
                         </tr>
                         <tr>
-                            <th>TitreUniveriste</th>
+                            <th>Titre de l'univeriste etudié :  </th>
                             <td>{{ parcours_universitaire.titreUniveriste }}</td>
                         </tr>
+                        <tr>
+                            <th> Pays  :  </th>
+                            <td>{{ parcours_universitaire.pays.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th> Niveau d'etude  :  </th>
+                            <td>{{ parcours_universitaire.niveau.libelle }}</td>
+                        </tr>
                     </tbody>
-                </table>
-                 <a href="{{ path('parcours_universitaire_index') }}" class="btn btn-info">Mon  parcours universitaire </a>   
+                  </table>
+                <br>
+                <br>
+                 <a href="{{ path('parcours_universitaire_index') }}" class="btn btn-primary ">Mon  parcours universitaire </a>   
               </div>
               <!-- /.card-body -->
             </div>

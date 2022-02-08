@@ -1,0 +1,13 @@
+
+
+{% block body %}
+{% for item in  nos_etudiant  %}
+   
+    {{ item.nom}}
+    {{item.email}}
+     {{item.tel}}
+     {{item.libelle}}
+
+{% endfor %}
+
+{% endblock %}

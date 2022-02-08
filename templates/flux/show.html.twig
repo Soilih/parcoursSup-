@@ -4,11 +4,11 @@
   <div class="content-wrapper">
      <div class="row" style="padding-left:2%;padding-top:2%">
           <div class="col-md-8">
-            <div class="card card-default">
+            <div class="card card-success">
               <div class="card-header">
                 <h3 class="card-title">
-                  <i class="fas fa-exclamation-triangle"></i>
-                  Description du flux 
+                
+                  Description du flux  
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -16,36 +16,70 @@
                 <table class="table">
                 <tbody>
                     <tr>
-                        <th>Id</th>
-                        <td>{{ flux.id }}</td>
-                    </tr>
-                    
-                    <tr>
-                        <th>Depart</th>
+                        <th>Depart de depart :  </th>
                         <td>{{ flux.depart ? flux.depart|date('Y-m-d') : '' }}</td>
                     </tr>
                     <tr>
-                        <th>Filiere</th>
+                        <th>Depart d'arrivé  :  </th>
+                        <td>{{ flux.dateArrive ? flux.dateArrive|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Filiere d'etude :  </th>
                         <td>{{ flux.filiere }}</td>
                     </tr>
                     <tr>
-                        <th>Diplome</th>
+                        <th>Composant de filiere  :  </th>
+                        <td>{{ flux.composant.libelle }}</td>
+                    </tr>
+                    <tr>
+                        <th>Diplome obtenu : </th>
                         <td>{{ flux.diplome }}</td>
                     </tr>
                     <tr>
-                        <th>Adresse</th>
-                        {# <td>{{ flux.adresse }}</td> #}
+                        <th>Avez-vous obtenu un travail ?   </th>
+                        <td>{{ flux.job }}</td> 
                     </tr>
                     <tr>
-                        <th>Ville</th>
-                        {# <td>{{ flux.ville }}</td> #}
+                        <th>Niveau d'etude  actuel </th>
+                        <td>{{ flux.niveauActuel.libelle }}</td> 
                     </tr>
                     <tr>
-                        <th>TitreUniversite</th>
-                        {# <td>{{ flux.titreUniversite }}</td> #}
+                        <th>Titre de l'universite inscrit </th>
+                        <td>{{ flux.titreUniversite }}</td> 
+                    </tr>
+                    <tr>
+                        <th>Type d'etablissement de l'enseignement superieur  </th>
+                        <td>{{ flux.typeUniversite.libelle }}</td> 
+                    </tr>
+                    <tr>
+                        <th>Avez-vous beneficié de bourse durant tes etudes </th>
+                        <td>{{ flux.boursier }}</td> 
+                    </tr>
+                    <tr>
+                        <th>Souhaitez-vous poursuivre les etudes ?  </th>
+                        <td>{{ flux.etudePoursuite }}</td> 
+                    </tr>
+                    <tr>
+                        <th> le projet pour votre pays   </th>
+                        <td>{{ flux.projet }}</td> 
+                    </tr>
+                    <tr>
+                        <th>Pays effectuant les etudes    </th>
+                        <td>{{ flux.pays.libelle }}</td> 
+                    </tr>
+                    <tr>
+                        <th> Deroulement des etudes   </th>
+                        <td>{{ flux.detail  }}</td> 
+                    </tr>
+                    <tr>
+                        <th> Difficultés rencontreés durany les etudes    </th>
+                        <td>{{ flux.suggestion   }}</td> 
                     </tr>
                 </tbody>
             </table>
+            <br>
+            <br>
+                           <a  class="btn btn-md btn-outline-primary" href="{{ path('flux_index') }}">consulter vos flux  </a>
               </div>
               <!-- /.card-body -->
             </div>

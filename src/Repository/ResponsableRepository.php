@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Responsable;
+use App\Entity\User;
+use App\Entity\Etudiant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +49,27 @@ class ResponsableRepository extends ServiceEntityRepository
         ;
     }
     */
+
+     /**
+  
+     * @return Etudiant[]
+     * @return User[]
+     * @return Responsable[]
+     */
+    public function listeDesResponsable(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+                           
+            "SELECT  r.nom as n ,  r.prenom as pr ,  e.nom  as nm , e.prenom as prnm,  r.tel as t ,  r.revenu as rev  ,  r.proffession  as pro ,  u.email , r.adresse as ad , r.email as em ,   r.prenom 
+             FROM App\Entity\Responsable r   , App\Entity\User u ,  App\Entity\Etudiant e 
+             where r.user = u.id  AND e.user = u.id   order by e.nom ASC  
+              "
+             
+        );
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
 }

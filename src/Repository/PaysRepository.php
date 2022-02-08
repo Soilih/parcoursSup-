@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Repository;
-
+use App\Data\SearchData;
 use App\Entity\Pays;
+use App\Entity\Etudiant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +48,18 @@ class PaysRepository extends ServiceEntityRepository
         ;
     }
     */
+
+       
+    public function listedestudiantparPays( $search): ?Pays
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p ', 'e' )
+            ->join('p.e' , 'e' )
+            ->andWhere('p.libelle = :val')
+            ->setParameter('libelle', $search)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    
 }

@@ -31,10 +31,10 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                     <table class="table">
+                     <table id="datatable"  class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        
                         <th>Libelle</th>
                         <th>Description </th>
                         <th>actions</th>
@@ -43,7 +43,7 @@
                 <tbody>
                 {% for composant in composants %}
                     <tr>
-                        <td>{{ composant.id }}</td>
+                        
                         <td>{{ composant.libelle }}</td>
                         <td>{{ composant.detail }}</td>
                         <td>

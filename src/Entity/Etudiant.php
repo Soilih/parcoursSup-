@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use   Doctrine\ORM\Query;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
@@ -417,6 +418,11 @@ class Etudiant
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+   
+
+    public function __toString() {
+        return $this->name;
     }
 
 

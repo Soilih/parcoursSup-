@@ -16,7 +16,6 @@
                             <li class="breadcrumb-item">
                                 <a href="#">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
                         </ol>
                     </div>
                     <!-- /.col -->
@@ -133,7 +132,7 @@
                                             <div class="card-body">
                                                 <div class="tab-content" id="custom-tabs-one-tabContent">
                                                     <div class="tab-pane fade show active" id="perso" role="tabpanel" aria-labelledby="perso">
-                                                        <div>
+                                                        <div id="ss">
                                                              <a class="btn btn-success btn-sm" href="{{ path("etudiant_new") }}"  style="float:right ;padding-top:1%"> Complement des informations </a>
                                                         </div>
                                                    
@@ -586,8 +585,6 @@
                                                                    
                                                                     <td>{{ fluxSortants.adresse }} </td>
                                                                     <td>{{ fluxSortants.motivation }} </td>
-                                                                     
-                                                                    
                                                                 </tr>
                                                             {% endfor %}
                                                                 
@@ -611,30 +608,7 @@
                 </div>
                 <!-- /.container-fluid -->
             </section>
-
-            <div class="card-footer" style="padding-left:2%">
-
-                <button type="button" class="btn btn-success float-right">
-                    <i class="fas fa-paper-planeg"></i>
-                    Transmettre votre candidature
-                </button>
-              
-                <a href="{{ path("candidature") }}" class="btn btn-primary">
-                    <i class="fas fa-check-circle"></i>
-                     Restituer le panier 
-                </a>
-                
-                <button type="button" class="btn btn-info">
-                    <i class="fas fa-print"></i>
-                    Imprimer votre dossier
-                </button>
-                <button type="button" class="btn btn-danger">
-                    <i class="fas fa-backspace"></i>
-                    Annuler le dossier
-                </button>
-
-
-            </div>
+           
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

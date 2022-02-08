@@ -17,14 +17,31 @@ class EcoleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('libelle' ,  TextType::class)
-            ->add('adresse' , TextareaType::class)
-            ->add('telephone' , TelType::class)
-            ->add('detail' , TextareaType::class )
-            ->add('email' , EmailType::class)
-            ->add('site' , TextType::class)
-            ->add('NomChef' , TextType::class)
-            ->add('TypeEcole' , ChoiceType::class , [  
+            ->add('libelle' ,  TextType::class , [
+                'label' => "Titre de l'etablissement"
+            ])
+            ->add('adresse' , TextareaType::class, [
+                'label' => "Adresse complet de l'etablissement"
+            ])
+            ->add('telephone' , TelType::class , [
+                'label' => "Numero de telephone "
+            ])
+            ->add('detail' , TextareaType::class , 
+             [
+                'label' => "A propos de l'etablissement"
+            ])
+            ->add('email' , EmailType::class , 
+             [
+                'label' => "Adresse email "
+            ])
+            ->add('site' , TextType::class, [
+                'label' => "Lien du site web"
+            ])
+            ->add('NomChef' , TextType::class , [
+                'label' => "Nom complet du responsable "
+            ])
+            ->add('TypeEcole' , ChoiceType::class , [ 
+                
                 'choices'  => [
                     'privé' => 'privé',
                     'publique' => 'publique',
@@ -32,9 +49,15 @@ class EcoleType extends AbstractType
                 'label' => 'cet est ecole est du type : ', 
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('postal' , TextType::class)
-            ->add('Fax' , TextType::class)
-            ->add('Commune' , TextType::class)
+            ->add('postal' , TextType::class , [
+                'label' => "Code postal"
+            ])
+            ->add('Fax' , TextType::class , [
+                'label' => "Numero de telephone Fax"
+            ])
+            ->add('Commune' , TextType::class , [
+                'label' => "L'etablissement se trouve dans quelle commune ? "
+            ])
             ->add('ile' , ChoiceType::class , [  
                 'choices'  => [
                     'Ngazidja' => 'Ngazidja',

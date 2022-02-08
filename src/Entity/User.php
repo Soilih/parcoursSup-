@@ -6,10 +6,15 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DoctrineExtensions\Query\Mysql\Date;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="Votre compte existe dejà")
@@ -25,6 +30,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Email(message = "The email '{{ value }}' is not a valid email"
+     * )
      */
     private $email;
 
@@ -35,6 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
+     * @Assert\Length(min = 6, max = 12, minMessage = "votre mot de passe doit avoir 6 caractere min ", maxMessage = "votre mot de passe doit avoir ne doit pas depasser  caractere 12 caracteres ")
      * @ORM\Column(type="string")
      */
     private $password;
@@ -46,11 +55,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  @Assert\Length(min = 8, max = 20, minMessage = "votre numero de telephone est inccorect", maxMessage = "votre numero de telephone est inccorect")
+     * @Assert\Regex(pattern="/^[0-9]*$/", message="votre phone ne doit pas contenir des lettre ") 
      */
     private $tel;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $Nom;
 
@@ -110,6 +122,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Candidature::class, mappedBy="user")
      */
     private $candidatures;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $code;
 
   
 
@@ -610,6 +627,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+   
+    
 
     
     

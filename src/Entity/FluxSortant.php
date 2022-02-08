@@ -4,13 +4,14 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * FluxSortant
  *
  * @ORM\Table(name="flux_sortant", indexes={@ORM\Index(name="IDX_97076445F74A28F3", columns={"typeuniversite_id"}), @ORM\Index(name="IDX_970764457F3310E7", columns={"composant_id"}), @ORM\Index(name="IDX_97076445B3E9C81", columns={"niveau_id"}), @ORM\Index(name="IDX_97076445A76ED395", columns={"user_id"}), @ORM\Index(name="IDX_97076445A6E44244", columns={"pays_id"})})
  * @ORM\Entity
  */
-class FluxSortant
+class FluxSortant 
 {
     /**
      * @var int
@@ -306,6 +307,4 @@ class FluxSortant
 
         return $this;
     }
-
-
 }

@@ -56,7 +56,7 @@ class EtudiantController extends AbstractController
             $entityManager->persist($etudiant);
             $entityManager->flush();
 
-            return $this->redirectToRoute('etudiant_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('etudiant/new.html.twig', [
@@ -86,7 +86,7 @@ class EtudiantController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('etudiant_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('etudiant/edit.html.twig', [

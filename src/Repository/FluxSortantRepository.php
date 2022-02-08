@@ -3,6 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\FluxSortant;
+use App\Entity\User;
+use App\Entity\Etudiant;
+use App\Entity\Pays;
+use App\Entity\Niveau;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +51,44 @@ class FluxSortantRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @return FluxSortant[]
+     * @return Etudiant[]
+     * @return User[]
+     */
+    public function listeFluxSortantEtudiant(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+                           
+            "SELECT  f.filiere , e.nom , u.tel , f.universite , n.libelle as lib , u.email , f.adresse ,  e.prenom , p.libelle , f.dateDepart
+             FROM App\Entity\FluxSortant f   , App\Entity\User u , App\Entity\Niveau n  ,  App\Entity\Etudiant e , App\Entity\Pays p 
+             where f.user = u.id  AND e.user = u.id  AND  f.niveau = n.id  AND  f.pays = p.id order by e.nom ASC  
+              "
+             
+        );
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+
+    /**
+     * @return FluxSortant[]
+     * @return Etudiant[]
+     * @return User[]
+     */
+    public function NombreUserParPays(): array
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+          "SELECT  DATE_FORMAT(f.dateDepart , '%Y') as dt ,  COUNT(f.id) as c 
+            FROM App\Entity\FluxSortant f  GROUP BY  f.dateDepart " 
+  
+        );
+        return $query->getResult();
+    }
+
 }

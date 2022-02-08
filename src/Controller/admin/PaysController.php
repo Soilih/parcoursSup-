@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\Pays;
 use App\Form\PaysType;
@@ -9,19 +9,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Controller\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 /**
- * @Route("/pays")
+ * @Route("/admin/pays")
  */
 class PaysController extends AbstractController
 {
     /**
      * @Route("/", name="pays_index", methods={"GET"})
      */
-    public function index(PaysRepository $paysRepository): Response
+    public function index(PaysRepository $paysRepository , PaginatorInterface $paginator , Request $request ): Response
     {
-        return $this->render('pays/index.html.twig', [
-            'pays' => $paysRepository->findAll(),
+       $pays = $paysRepository->findAll();
+       $pays = $paginator->paginate(
+         $pays , $request->query->getInt('page' , 1 ) , 
+         3
+       );
+       return $this->render('pays/index.html.twig', [
+        'pays'=>$pays    
+        
+            
         ]);
     }
 
@@ -38,7 +46,6 @@ class PaysController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($pay);
             $entityManager->flush();
-
             return $this->redirectToRoute('pays_new', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -52,7 +59,7 @@ class PaysController extends AbstractController
     /**
      * @Route("/{id}", name="pays_show", methods={"GET"})
      */
-    public function show(Pays $pay): Response
+    public function show( Pays $pay): Response
     {
         return $this->render('pays/show.html.twig', [
             'pay' => $pay,

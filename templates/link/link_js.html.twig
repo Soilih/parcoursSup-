@@ -1,4 +1,4 @@
-   {% block stylesheets %}
+{% block stylesheets %}
 
 <script src="{{ asset("plugins/jquery/jquery.min.js") }}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -12,10 +12,10 @@
 <!-- ChartJS -->
 <script src="{{ asset("plugins/chart.js/Chart.min.js") }}"></script>
 <!-- Sparkline -->
-<script src="{{ asset("plugins/sparklines/sparkline.js")}}"></script>
+<script src="{{ asset("plugins/sparklines/sparkline.js") }}"></script>
 <!-- JQVMap -->
-<script src="{{ asset("plugins/jqvmap/jquery.vmap.min.js") }}"></script>
-<script src="{{ asset("plugins/jqvmap/maps/jquery.vmap.usa.js") }}"></script>
+{# <script src="{{ asset("plugins/jqvmap/jquery.vmap.min.js") }}"></script> #}
+{# <script src="{{ asset("plugins/jqvmap/maps/jquery.vmap.usa.js") }}"></script> #}
 <!-- jQuery Knob Chart -->
 <script src="{{ asset("plugins/jquery-knob/jquery.knob.min.js") }}"></script>
 <!-- daterangepicker -->
@@ -30,10 +30,16 @@
 <!-- AdminLTE App -->
 <script src="{{ asset("dist/js/adminlte.js") }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset("dist/js/demo.js") }}"></script>
+{# <script src="{{ asset("dist/js/demo.js") }}"></script> #}
 <script src="{{ asset("dist/js/traitement.js") }}"></script>
+<script src="{{ asset("dist/js/stat.js") }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset("dist/js/pages/dashboard.js") }}"></script>
+<script src="{{ asset("dist/js/pages/dashboard.js") }}"></script> 
 <script src="{{ asset("dist/js/main.js") }}"></script>
-<script src="{{ asset("plugins/filterizr/jquery.filterizr.min.js") }}"></script>
+ <script src="{{ asset("plugins/filterizr/jquery.filterizr.min.js") }}"></script> 
+<script src=" {{ asset("plugins/datatables/jquery.dataTables.min.js") }}"></script>
+<script src=" {{ asset("plugins/datatables-responsive/js/dataTables.responsive.min.js") }}"></script> 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+   
  {% endblock %}  

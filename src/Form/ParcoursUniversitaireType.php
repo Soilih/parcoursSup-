@@ -39,7 +39,7 @@ class ParcoursUniversitaireType extends AbstractType
                 'attr'=>['class'=>'form-control'] , 
                 "label"=> "Mention obtenu"
             ])
-            ->add('fichierFile' , VichImageType::class , [
+            ->add('imageFile' , VichImageType::class , [
                 "label"=> "Joindre une justificatif " ,
                     'label' => false,
                     'required' => false,

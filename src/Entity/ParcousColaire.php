@@ -65,22 +65,7 @@ class ParcousColaire
      */
     private $imageFile;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="attestation", type="string", length=255, nullable=false)
-     */
-    private $attestation;
-
-    /**
-     * @Vich\UploadableField(mapping="product_images", fileNameProperty="attestation")
-     * @var File
-     */
-    private $attestationFile;
-
-
-    
-
+   
     /**
      * @var string|null
      *
@@ -261,23 +246,9 @@ class ParcousColaire
         return $this->imageFile;
     }
 
-    public function setattestationFile(File $attestation = null)
-    {
-        $this->imageFile = $attestation;
+   
 
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if ($attestation) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTime('now');
-        }
-    }
-
-    public function getattestationFile()
-    {
-        return $this->attestationFile;
-    }
+    
 
    
 

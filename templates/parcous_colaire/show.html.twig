@@ -3,12 +3,12 @@
 <div class="wrapper">
   <div class="content-wrapper">
      <div class="row" style="padding-left:2%;padding-top:2%">
-          <div class="col-md-6">
+          <div class="col-md-9">
             <div class="card card-success">
               <div class="card-header">
                 <h3 class="card-title">
                 
-                Description : 
+                Description parcours lyceé  : 
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -16,41 +16,50 @@
                  <table class="table">
                  <tbody>
                     <tr>
-                        <th>Id</th>
-                        <td>{{ parcous_colaire.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Anne Obtention Bac</th>
+                        <th>Anneé scolaire : </th>
                         <td>{{ parcous_colaire.anneObtentionBac ? parcous_colaire.anneObtentionBac|date('Y-m-d') : '' }}</td>
                     </tr>
                     <tr>
-                        <th>Serie</th>
+                        <th>Etablissement frequenté   : </th>
+                        <td>{{ parcous_colaire.ecole.libelle }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ville de l'etablissement    : </th>
+                        <td>{{ parcous_colaire.ecole.adresse }}</td>
+                    </tr>
+                    <tr>
+                        <th>Serie du bac  : </th>
                         <td>{{ parcous_colaire.serie }}</td>
                     </tr>
                     <tr>
-                        <th>Mention</th>
+                        <th>Mention obtenu :  </th>
                         <td>{{ parcous_colaire.mention }}</td>
                     </tr>
                     <tr>
-                        <th>Moyenne</th>
+                        <th>Moyenne obtenu :  </th>
                         <td>{{ parcous_colaire.moyenne }}</td>
                     </tr>
                     <tr>
-                        <th>Releve</th>
+                        <th>Niveau d'etude :  </th>
+                        <td>{{ parcous_colaire.niveau.libelle }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description  :  </th>
+                        <td>{{ parcous_colaire.commentaire}}</td>
+                    </tr>
+                    <tr>
+                        <th>Releve de note (Piece justificatif ) : </th>
                          <td> 
                          <a href="{{ asset('upload/'~ parcous_colaire.releve) }}">View brochure (PDF)</a>
                          </td>
                     </tr>
-                    <tr>
-                        <th>Attestation</th>
-                        <td>
-                          <a href="{{ asset('upload/'~ parcous_colaire.attestation) }}">View brochure (PDF)</a>
-                        </td>
-                      </tr>
-                        </tbody>
+                    
+                    </tbody>
                  
                     </table>
-                     <a href="{{ path('parcous_colaire_index') }}" class="btn btn-info"> consulter votre  parcours scolaire  </a>
+                    <br>
+                    <br>
+                     <a href="{{ path('parcous_colaire_index') }}" class="btn btn-primary"> consulter votre  parcours scolaire  </a>
               </div>
               <!-- /.card-body -->
             </div>

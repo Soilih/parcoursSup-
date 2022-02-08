@@ -46,16 +46,11 @@ class ParcousColaireType extends AbstractType
                 'attr'=>['class'=>'form-control']
             ])
             ->add('moyenne' , NumberType::class)
+
             ->add('imageFile' , VichImageType::class , [
                 'required' => false,
                 'allow_delete' => false,
             ])
-            ->add('attestationFile' , VichImageType::class , [
-                'required' => false,
-                'allow_delete' => false,
-        
-            ])
-           
             ->add('ecole' , EntityType::class , [
                 "class"=> Ecole::class , 
                 "choice_label"=>'libelle', 

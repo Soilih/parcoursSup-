@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\Niveau;
 use App\Form\NiveauType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/niveau")
+ * @Route("/admin/niveau")
  */
 class NiveauController extends AbstractController
 {
@@ -45,7 +45,8 @@ class NiveauController extends AbstractController
         return $this->renderForm('niveau/new.html.twig', [
             'niveau' => $niveau,
             'form' => $form,
-            'niveaux' => $niveauRepository->findAll(),
+            'niveaux' => $niveauRepository->findBy([],['libelle' => 'ASC'])
+               
         ]);
     }
 

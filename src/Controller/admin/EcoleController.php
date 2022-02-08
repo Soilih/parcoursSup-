@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\Ecole;
 use App\Form\EcoleType;
@@ -11,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/ecole")
+ * @Route("/admin/ecole")
  */
 class EcoleController extends AbstractController
 {

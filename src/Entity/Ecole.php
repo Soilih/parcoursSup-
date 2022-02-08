@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Ecole
@@ -45,7 +46,7 @@ class Ecole
     /**
      * @var string
      *
-     * @ORM\Column(name="detail", type="string", length=255, nullable=false)
+     * @ORM\Column(name="detail", type="text",  nullable=false)
      */
     private $detail;
 

@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * ParcoursUniversitaire
  *
  * @ORM\Table(name="parcours_universitaire", indexes={@ORM\Index(name="IDX_996FC494A6E44244", columns={"pays_id"}), @ORM\Index(name="IDX_996FC4942A52F05F", columns={"universite_id"}), @ORM\Index(name="IDX_996FC494A76ED395", columns={"user_id"}), @ORM\Index(name="IDX_996FC494B3E9C81", columns={"niveau_id"})})
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class ParcoursUniversitaire
 {
@@ -48,6 +51,12 @@ class ParcoursUniversitaire
      * @ORM\Column(name="fichier", type="string", length=255, nullable=false)
      */
     private $fichier;
+
+    /**
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="fichier")
+     * @var File
+     */
+    private $imageFile;
 
     /**
      * @var string
@@ -245,6 +254,24 @@ class ParcoursUniversitaire
         $this->niveau = $niveau;
 
         return $this;
+    }
+
+    public function setImageFile(File $fichier = null)
+    {
+        $this->imageFile = $fichier;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($fichier) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
     }
 
 
